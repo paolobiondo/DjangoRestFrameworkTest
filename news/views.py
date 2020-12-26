@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.views import View
 from news import forms as news_forms
 from news import models as news_models
@@ -24,7 +24,7 @@ class News_Singolo(APIView):
     def delete(self,request,id):
         news = news_models.News.objects.filter(id=id)
         news.delete()
-        return HttpResponse('deleted')
+        return HttpResponse({'pass':1})
 
 
 class Index(View):
@@ -40,5 +40,11 @@ class Index(View):
             post.title=form.cleaned_data['title']
             post.content=form.cleaned_data['content']
             post.save()
-            return HttpResponse('thanks')
+            return HttpResponseRedirect('/')
     
+class NewsSingle(View):
+    def get(self, request, id):
+        args = {}
+        args['idUser']=id
+        return render(request,'news.html',args)
+        

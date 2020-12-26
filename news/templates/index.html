@@ -20,9 +20,8 @@ function getNews() {
         // handle a successful response
         success : function(json) {
             for (var i = 0; i < json.length; i++) {
-                console.log(json[i])
-                $("#news").prepend("<li id='post-"+json[i].id+"'><strong>"+json[i].title+"</strong> - <em> "+json[i].content+"</em> - <span> "+json[i].date+
-                " - </span><em><a id='delete-post-"+json[i].id+"'>delete me</a></em></li>");
+                $("#news").prepend("<li id='post-"+json[i].id+"'><a href='/"+json[i].id+"'><strong>"+json[i].title+"</strong></a> - <em> "+json[i].content+"</em> - <span> "+json[i].date+
+                " - </span></li>");
             }
         },
         // handle a non-successful response
